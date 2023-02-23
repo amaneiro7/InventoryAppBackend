@@ -14,16 +14,12 @@ class BranchService {
   };
 //GET
   async find() {
-    const branchs = await models.Branch.findAll({
-      include: ['category', 'item', 'models']
-    });
+    const branchs = await models.Branch.findAll();
     return branchs;
   }
 
   async findOne(id) {
-    const branch = await models.Branch.findByPk(id,{
-      include: ['category', 'item', 'models']
-    });
+    const branch = await models.Branch.findByPk(id);
     if (!branch) {
       throw boom.notFound('no existe esa Marca')
     }

@@ -14,9 +14,7 @@ class ItemService {
   };
 //GET
   async find() {
-    const items = await models.Item.findAll({
-      include: ['category', 'branch', 'models']
-    });
+    const items = await models.Item.findAll();
     return items;
   }
 

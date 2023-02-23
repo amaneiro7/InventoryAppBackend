@@ -15,9 +15,7 @@ class ModelService {
 
   //GET
   async find() {
-    const model = await models.Models.findAll({
-      include: ['category', 'item', 'branch']
-    });
+    const model = await models.Models.findAll();
     return model
   }
 
