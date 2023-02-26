@@ -1,8 +1,8 @@
 const { Model, DataTypes, Sequelize } = require('sequelize');
 
-const BRANCH_TABLE = 'branch';
+const BRAND_TABLE = 'brand';
 
-const BranchSchema = {
+const BrandSchema = {
   id: {
     allowNull: false,
     autoIncrement: true,
@@ -22,26 +22,26 @@ const BranchSchema = {
   },
 };
 
-class Branch extends Model {
+class Brand extends Model {
   static associate(models) {
     this.hasMany(models.Item, {
       as: 'item',
-      foreignKey: 'branchId'
+      foreignKey: 'brandId'
     }),
     this.hasMany(models.Models, {
       as: 'model',
-      foreignKey: 'branchId'
+      foreignKey: 'brandId'
     })
   }
 
   static config(sequelize) {
     return {
       sequelize,
-      tableName: BRANCH_TABLE,
-      modelName: 'Branch',
+      tableName: BRAND_TABLE,
+      modelName: 'Brand',
       timestamps: false,
     }
   }
 };
 
-module.exports = { BranchSchema, BRANCH_TABLE, Branch}
+module.exports = { BrandSchema, BRAND_TABLE, Brand}

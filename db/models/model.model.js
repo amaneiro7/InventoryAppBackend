@@ -1,5 +1,5 @@
 const { Model, DataTypes, Sequelize } = require('sequelize');
-const { BRANCH_TABLE } = require('./branch.model');
+const { BRAND_TABLE } = require('./brand.model');
 
 const MODEL_TABLE = 'model';
 
@@ -21,12 +21,12 @@ const ModelSchema = {
     field: 'created_at',
     defaultValue: Sequelize.NOW
   },
-  branchId: {
-    field: 'branch_id',
+  brandId: {
+    field: 'brand_id',
     allowNull: false,
     type: DataTypes.INTEGER,
     references: {
-      model: BRANCH_TABLE,
+      model: BRAND_TABLE,
       key: 'id'
     },
     onUpdate: 'CASCADE',
@@ -36,8 +36,12 @@ const ModelSchema = {
 
 class Models extends Model {
   static associate(models) {
-    this.belongsTo(models.Branch, { as: 'branch' })
-  }
+    this.belongsTo(models.Brand, { as: 'brand' }),
+    this.hasMany(models.Item, {
+      as: 'item',
+      foreignKey: 'modelId',
+  })
+}
 
   static config(sequelize) {
     return {

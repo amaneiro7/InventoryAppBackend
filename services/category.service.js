@@ -18,8 +18,8 @@ class CategoryService {
     return categories;
   }
 
-  async findOne(name) {
-    const category = await models.Category.findOne({where: { name }});
+  async findOne(id) {
+    const category = await models.Category.findByPk(id);
     if (!category) {
       throw boom.notFound('categoria no existe')
     }
@@ -29,7 +29,7 @@ class CategoryService {
   //PATCH
   async update(id, changes) {
     const category = await this.findOne(id);
-    const res = await category.models.update(changes);
+    const res = await category.update(changes);
     return res
   }
 

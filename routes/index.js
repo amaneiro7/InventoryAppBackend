@@ -1,7 +1,7 @@
 const express = require('express');
 const categoriesRouter = require('./categories.router');
 const itemsRouter = require('./items.router');
-const branchRouter = require("./branch.router.js");
+const brandRouter = require("./brand.router.js");
 const modelsRouter = require("./model.router.js");
 
 
@@ -10,7 +10,7 @@ function routerApi(app) {
   app.use('/api/v1', router)
   router.use('/categories', categoriesRouter);
   router.use('/items', itemsRouter);
-  router.use('/branch', branchRouter);
+  router.use('/brand', brandRouter);
   router.use('/models', modelsRouter);
 
 };

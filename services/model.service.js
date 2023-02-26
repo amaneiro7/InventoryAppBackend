@@ -1,5 +1,8 @@
 const boom = require('@hapi/boom');
 const { models } = require('../libs/sequelize');
+const { Brand } = require('../db/models/brand.model')
+const { Item } = require('../db/models/item.model')
+
 
 class ModelService {
 
@@ -15,14 +18,25 @@ class ModelService {
 
   //GET
   async find() {
-    const model = await models.Models.findAll();
+    const model = await models.Models.findAll({
+      include: [
+        {
+          model: Brand,
+          as: 'brand',
+          required: false
+        },
+        {
+          model: Item,
+          as: 'item',
+          required: false
+        },
+      ],
+    });
     return model
   }
 
   async findOne(id) {
-    const model = await models.Models.findByPk(id, {
-      include: ['category', 'item', 'branch']
-    });
+    const model = await models.Models.findByPk(id);
     if (!model) {
       throw boom.notFound('modelo no existe')
     }
@@ -32,7 +46,7 @@ class ModelService {
   //PATCH
   async update(id, changes) {
     const model = await this.findOne(id);
-    const res = await model.models.update(changes);
+    const res = await model.update(changes);
     return res
   }
 

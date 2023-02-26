@@ -29,12 +29,12 @@ router.get('/', async (request, response, next) => {
   };
 });
 
-router.get('/:name',
+router.get('/:id',
   validatorHandler(getCategorySchema, 'params'),
   async (request, response, next) => {
     try {
-      const { name } = request.params;
-      const category = await service.findOne(name);
+      const { id } = request.params;
+      const category = await service.findOne(id);
       response.json(category);
     } catch (error) {
       next(error)
@@ -42,7 +42,7 @@ router.get('/:name',
   });
 
 //PATCH
-router.patch('/:name',
+router.patch('/:id',
   validatorHandler(getCategorySchema, 'params'),
   validatorHandler(updateCategorySchema, 'body'),
   async (request, response, next) => {

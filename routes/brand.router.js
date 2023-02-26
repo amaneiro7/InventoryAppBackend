@@ -1,19 +1,19 @@
 const express = require('express');
-const BranchService = require("../services/branch.service.js");
+const BrandService = require("../services/brand.service.js");
 const validatorHandler = require("../middlewares/validator.handler.js");
-const { createBranchSchema, getBranchSchema, updateBranchSchema } = require("../schemas/branch.schema.js");
+const { createBrandSchema, getBrandSchema, updateBrandSchema } = require("../schemas/brand.schema.js");
 
 const router = express.Router();
-const service = new BranchService();
+const service = new BrandService();
 
 //POST
 router.post('/',
-  validatorHandler(createBranchSchema, 'body'),
+  validatorHandler(createBrandSchema, 'body'),
   async (request, response, next) => {
     try {
       const body = request.body;
-      const newBranch = await service.create(body);
-      response.status(201).json(newBranch);
+      const newBrand = await service.create(body);
+      response.status(201).json(newBrand);
     } catch (error) {
       next(error)
     };
@@ -23,19 +23,19 @@ router.post('/',
 router.get('/',
   async (request, response, next) => {
     try {
-      const branch = await service.find()
-      response.json(branch)
+      const brand = await service.find()
+      response.json(brand)
     } catch (error) {
       next(error)
     }
   });
 router.get('/:id',
-  validatorHandler(getBranchSchema, 'params'),
+  validatorHandler(getBrandSchema, 'params'),
   async (request, response, next) => {
     try {
       const { id } = request.params;
-      const branch = await service.findOne(id)
-      response.json(branch)
+      const brand = await service.findOne(id)
+      response.json(brand)
     } catch (error) {
       next(error)
     }
@@ -43,14 +43,14 @@ router.get('/:id',
 
 //PATCH
 router.patch('/:id',
-  validatorHandler(getBranchSchema, 'params'),
-  validatorHandler(updateBranchSchema, 'body'),
+  validatorHandler(getBrandSchema, 'params'),
+  validatorHandler(updateBrandSchema, 'body'),
   async (request, response, next) => {
     try {
       const { id } = request.params;
       const body = request.body;
-      const branch = await service.update(id, body)
-      response.json(branch)
+      const brand = await service.update(id, body)
+      response.json(brand)
     } catch (error) {
       next(error)
     }
@@ -58,7 +58,7 @@ router.patch('/:id',
 
 //DELETE
 router.delete('/:id',
-  validatorHandler(getBranchSchema, 'params'),
+  validatorHandler(getBrandSchema, 'params'),
   async (request, response, next) => {
     try {
       const { id } = request.params;

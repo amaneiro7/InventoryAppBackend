@@ -2,16 +2,16 @@ const Joi = require('joi');
 
 const id = Joi.number().integer();
 const name = Joi.string();
-const branchId = Joi.number().integer();
+const brandId = Joi.number().integer();
 
 const createModelSchema = Joi.object({
   name: name.required(),
-  branchId: branchId.required()
+  brandId: brandId.required()
 });
 
 const updateModelSchema = Joi.object({
   name,
-  branchId
+  brandId
 })
 
 const getModelSchema = Joi.object({
