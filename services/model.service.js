@@ -1,8 +1,7 @@
 const boom = require('@hapi/boom');
 const { models } = require('../libs/sequelize');
 const { Brand } = require('../db/models/brand.model')
-const { Item } = require('../db/models/item.model')
-
+const { Item } = require('../db/models/item.model');
 
 class ModelService {
 
@@ -17,21 +16,40 @@ class ModelService {
   }
 
   //GET
-  async find() {
+  async find(req) {
+    let where = {}
+    if (req.query.brandId) {
+      where.brandId = req.query.brandId
+    }
+    if (req.query.name) {
+      where.name = req.query.name
+    }
     const model = await models.Models.findAll({
+      where: where,
       include: [
         {
           model: Brand,
           as: 'brand',
-          required: false
+          required: false,
         },
         {
           model: Item,
           as: 'item',
           required: false
-        },
+        }
       ],
     });
+    return model
+  }
+  async findOneFilter(brandId) {
+    const model = await models.Models.findAll({
+      where: {
+        brandId: brandId
+      }
+    });
+    if (!model) {
+      throw boom.notFound('modelo no existe')
+    }
     return model
   }
 

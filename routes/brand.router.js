@@ -23,7 +23,7 @@ router.post('/',
 router.get('/',
   async (request, response, next) => {
     try {
-      const brand = await service.find()
+      const brand = await service.find(request)
       response.json(brand)
     } catch (error) {
       next(error)
