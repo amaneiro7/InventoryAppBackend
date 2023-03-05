@@ -1,5 +1,4 @@
 const { Model, DataTypes, Sequelize } = require('sequelize');
-const { BRAND_TABLE } = require('./brand.model');
 
 const CATEGORY_TABLE = 'category';
 
@@ -21,22 +20,9 @@ const CategorySchema = {
     field: 'created_at',
     defaultValue: Sequelize.NOW
   },
-  brandId: {
-    field: 'brand_id',
-    allowNull: false,
-    type: DataTypes.INTEGER,
-    defaultValue: 1,
-    references: {
-      model: BRAND_TABLE,
-      key: 'id'
-    },
-    onUpdate: 'CASCADE',
-    onDelete: 'SET NULL'
-  },
 };
 class Category extends Model {
   static associate(models) {
-    this.belongsTo(models.Brand, { as: 'brand' }),
     this.hasMany(models.Item, {
       as: 'item',
       foreignKey: 'categoryId'

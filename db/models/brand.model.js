@@ -31,10 +31,6 @@ class Brand extends Model {
     this.hasMany(models.Models, {
       as: 'model',
       foreignKey: 'brandId'
-    }),
-    this.hasMany(models.Category, {
-      as: 'category',
-      foreignKey: 'brandId'
     })
   }
 
