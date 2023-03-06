@@ -19,14 +19,14 @@ class BrandService {
   async find(req) {
     const brands = await models.Brand.findAll({
       include: [
-        {
-          model: Category,
-          as: 'category',
-          required: false,
-          where: {
-            id: req.query.category
-          }
-        },
+        // {
+        //   model: Category,
+        //   as: 'category',
+        //   required: false,
+        //   where: {
+        //     id: req.query.category
+        //   }
+        // },
         {
           model: Item,
           as: 'item',
