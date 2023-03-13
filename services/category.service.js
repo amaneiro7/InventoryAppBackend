@@ -1,4 +1,7 @@
 const boom = require('@hapi/boom');
+const { Brand } = require('../db/models/brand.model');
+const { Item } = require('../db/models/item.model');
+const { Models } = require('../db/models/model.model');
 const { models } = require('../libs/sequelize');
 
 class CategoryService {
@@ -7,14 +10,35 @@ class CategoryService {
 
   }
 
-//POST
+  //POST
   async create(data) {
-      const newCategory = await models.Category.create(data)
-      return newCategory
+    const newCategory = await models.Category.create(data)
+    return newCategory
   };
-//GET
+  //GET
   async find() {
-    const categories = await models.Category.findAll();
+    const categories = await models.Category.findAll({
+      include: [
+        {
+          model: Item,
+          as: 'item',
+          required: false,
+          include: [
+            {
+              model: Brand,
+              as: 'brand',
+              required: false
+            },
+            {
+              model: Models,
+              as: 'model',
+              required: false
+            },
+
+          ]
+        },
+      ],
+    });
     return categories;
   }
 

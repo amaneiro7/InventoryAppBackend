@@ -41,7 +41,26 @@ class ItemService {
   }
 
   async findOne(id) {
-    const item = await models.Item.findByPk(id);
+    const item = await models.Item.findByPk(id,
+      {
+        include: [
+          {
+            model: Category,
+            as: 'category',
+            required: false
+          },
+          {
+            model: Brand,
+            as: 'brand',
+            required: false
+          },
+          {
+            model: Models,
+            as: 'model',
+            required: false
+          },
+        ],
+      });
     if (!item) {
       throw boom.notFound('item no existe')
     }
