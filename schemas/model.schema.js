@@ -3,14 +3,17 @@ const Joi = require('joi');
 const id = Joi.number().integer();
 const name = Joi.string();
 const brandId = Joi.number().integer();
+const categoryId = Joi.number().integer();
 
 const createModelSchema = Joi.object({
   name: name.required(),
-  brandId: brandId.required()
+  categoryId: categoryId.required(),
+  brandId: brandId.required(),
 });
 
 const updateModelSchema = Joi.object({
   name,
+  categoryId,
   brandId
 })
 

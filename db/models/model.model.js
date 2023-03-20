@@ -1,5 +1,6 @@
 const { Model, DataTypes, Sequelize } = require('sequelize');
 const { BRAND_TABLE } = require('./brand.model');
+const { CATEGORY_TABLE } = require('./category.model');
 
 const MODEL_TABLE = 'model';
 
@@ -31,11 +32,23 @@ const ModelSchema = {
     },
     onUpdate: 'CASCADE',
     onDelete: 'SET NULL'
+  },
+  categoryId: {
+    field: 'category_id',
+    allowNull: false,
+    type: DataTypes.INTEGER,
+    references: {
+      model: CATEGORY_TABLE,
+      key: 'id'
+    },
+    onUpdate: 'CASCADE',
+    onDelete: 'SET NULL'
   }
 };
 
 class Models extends Model {
   static associate(models) {
+    this.belongsTo(models.Category, { as: 'category' }),
     this.belongsTo(models.Brand, { as: 'brand' }),
     this.hasMany(models.Item, {
       as: 'item',
