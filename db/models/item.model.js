@@ -26,6 +26,10 @@ const ItemSchema = {
     allowNull: false,
     type: DataTypes.BOOLEAN,
   },
+  obsolete: {
+    allowNull: false,
+    type: DataTypes.BOOLEAN,
+  },
   createdAt: {
     allowNull: false,
     type: DataTypes.DATE,

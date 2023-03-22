@@ -2,6 +2,7 @@ const boom = require('@hapi/boom');
 const { models } = require('../libs/sequelize');
 const { Brand } = require('../db/models/brand.model')
 const { Item } = require('../db/models/item.model');
+const { Category } = require('../db/models/category.model');
 
 class ModelService {
 
@@ -30,6 +31,11 @@ class ModelService {
         {
           model: Brand,
           as: 'brand',
+          required: false,
+        },
+        {
+          model: Category,
+          as: 'category',
           required: false,
         },
         {
