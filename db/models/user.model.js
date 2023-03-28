@@ -13,14 +13,17 @@ const UserSchema = {
   name: {
     allowNull: false,
     type: DataTypes.STRING,
-    unique: true,
   },
   lastname: {
     allowNull: false,
     type: DataTypes.STRING,
-    unique: true,
   },
   username: {
+    allowNull: false,
+    type: DataTypes.STRING,
+    unique: true,
+  },
+  email: {
     allowNull: false,
     type: DataTypes.STRING,
     unique: true,
@@ -28,7 +31,6 @@ const UserSchema = {
   password: {
     allowNull: false,
     type: DataTypes.STRING,
-    unique: true,
   },
   createdAt: {
     allowNull: false,
