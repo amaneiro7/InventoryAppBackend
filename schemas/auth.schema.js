@@ -1,10 +1,10 @@
 const Joi = require('joi');
 
-const username = Joi.string().email();
+const email = Joi.string().email();
 const password = Joi.string().min(8);
 
 const loginAuthSchema = Joi.object({
-  username: username.required(),
+  email: email.required(),
   password: password.required(),
 });
 
