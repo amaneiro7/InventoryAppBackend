@@ -1,5 +1,6 @@
 const express = require('express');
 const routerApi = require('./routes');
+const { checkApiKey } = require('./middlewares/auth.handler.js')
 const { logErrors, errorHandler, boomErrorHandler, ormErrorHandler } = require('./middlewares/error.handler');
 const cors = require('cors');
 
@@ -18,6 +19,9 @@ const options = {
 
 app.use(cors(options));
 app.use(express.json());
+app.get('/nueva-ruta', checkApiKey, (req, res) => {
+  res.send('Hola, soy una nueva ruta')
+})
 
 
 routerApi(app);

@@ -1,9 +1,10 @@
 const { config } = require('../config/config');
 
 
-const USER = encodeURIComponent(config.dbUser);
-const PASSWORD = encodeURIComponent(config.dbPassword);
-const URI = `postgres://${USER}:${PASSWORD}@${config.dbHost}:${config.dbPort}/${config.dbName}`;
+// const USER = encodeURIComponent(config.dbUser);
+// const PASSWORD = encodeURIComponent(config.dbPassword);
+// const URI = `postgres://${USER}:${PASSWORD}@${config.dbHost}:${config.dbPort}/${config.dbName}`;
+const URI = config.dbUrl;
 
 module.exports = {
   development: {
