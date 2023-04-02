@@ -3,13 +3,18 @@ const CategoryService = require("../services/category.service.js");
 const validatorHandler = require("../middlewares/validator.handler.js");
 const { createCategorySchema, getCategorySchema, updateCategorySchema } = require("../schemas/category.schema.js");
 
+const passport = require('passport');
+const { checkRoles } = require('../middlewares/auth.handler.js');
+
 const router = express.Router();
 const service = new CategoryService();
 
 //POST
 router.post('/',
-  validatorHandler(createCategorySchema, 'body'),
-  async (request, response, next) => {
+passport.authenticate('jwt', { session: false }),
+checkRoles('admin, seller,customer'),
+validatorHandler(createCategorySchema, 'body'),
+async (request, response, next) => {
     try {
       const body = request.body;
       const newCategory = await service.create(body);
