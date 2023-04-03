@@ -31,4 +31,16 @@ validatorHandler(loginAuthSchema, 'body'),
     };
   });
 
+  router.post('/chancge-password',
+  //capa de validacion de datos
+  async (req, res, next) => {
+    try {
+      const { token, password } = req.body
+      const rta = await service.changePassword(token, password)
+      res.json(rta)
+    } catch (error) {
+      next(error)
+    };
+  });
+
 module.exports = router;

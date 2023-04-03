@@ -3,20 +3,13 @@
 /** @type {import('sequelize-cli').Migration} */
 module.exports = {
   async up (queryInterface, Sequelize) {
-    /**
-     * Add altering commands here.
-     *
-     * Example:
-     * await queryInterface.createTable('users', { id: Sequelize.INTEGER });
-     */
+    await queryInterface.addColumn('user', 'recovery_token', {
+      allowNull: true,
+      type: Sequelize.STRING,
+    })
   },
 
-  async down (queryInterface, Sequelize) {
-    /**
-     * Add reverting commands here.
-     *
-     * Example:
-     * await queryInterface.dropTable('users');
-     */
+  async down (queryInterface) {
+    await queryInterface.removeColumn('user', 'recovery_token')
   }
 };

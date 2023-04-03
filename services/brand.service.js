@@ -1,5 +1,4 @@
 const boom = require('@hapi/boom');
-const { Category } = require('../db/models/category.model');
 const { Item } = require('../db/models/item.model');
 const { Models } = require('../db/models/model.model');
 const { models } = require('../libs/sequelize');
@@ -16,17 +15,9 @@ class BrandService {
       return newBrand
   };
 //GET
-  async find(req) {
+  async find() {
     const brands = await models.Brand.findAll({
       include: [
-        // {
-        //   model: Category,
-        //   as: 'category',
-        //   required: false,
-        //   where: {
-        //     id: req.query.category
-        //   }
-        // },
         {
           model: Item,
           as: 'item',
